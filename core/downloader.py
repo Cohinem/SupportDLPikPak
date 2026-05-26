@@ -35,6 +35,8 @@ _503_BASE_DELAY = 10.0
 _503_MAX_DELAY  = 30.0
 _503_MAX_RETRY  = 6
 
+_NATURAL_SORT_RE = re.compile(r'(\d+)')
+
 def _jitter(base: float) -> float:
     return base + random.uniform(0, base * 0.5)
 
@@ -92,7 +94,7 @@ class Downloader:
         return f"{h:02d}:{m:02d}:{s:02d}" if h > 0 else f"{m:02d}:{s:02d}"
 
     def _natural_key(self, item):
-        return [int(s) if s.isdigit() else s.lower() for s in re.split(r'(\d+)', item['name'])]
+        return [int(s) if s.isdigit() else s.lower() for s in _NATURAL_SORT_RE.split(item['name'])]
 
     def _recursive_sort(self, node):
         if 'files'   in node: node['files'].sort(key=self._natural_key)
