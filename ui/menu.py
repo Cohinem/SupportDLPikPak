@@ -122,41 +122,28 @@ class Menu:
             console.print()
             table = Table(show_header=False, box=None, padding=(0, 2))
             table.add_column("Key",    style="bold cyan", justify="right", width=6)
-            table.add_column("Chức năng",  style="bold white",  min_width=28)
-            table.add_column("Trạng thái", justify="left",      min_width=12)
+            table.add_column("Feature",  style="bold white",  min_width=28)
+            table.add_column("Status", justify="left",      min_width=12)
             table.add_row("[1]", "Proxy",                self._badge(Config.USE_PROXY))
-            table.add_row("[2]", "Số luồng/file",        f"[cyan]{Config.CONCURRENT_THREADS} conn[/]")
-            table.add_row("[3]", "Cài đặt nâng cao",     "")
-            table.add_row("[4]", "Ngôn ngữ",              f"[dim]{Config.LANGUAGE.upper()}[/]")
-            table.add_row("[5]", "Premium Transfer Mode", self._badge(Config.FORCE_PREMIUM_MODE))
-            table.add_row("[6]", "Cache",                 self._badge(Config.USE_CACHE))
+            table.add_row("[2]", "Threads/file",        f"[cyan]{Config.CONCURRENT_THREADS} conn[/]")
+            table.add_row("[3]", "Advanced Settings",     "")
+            table.add_row("[4]", "Premium Transfer Mode", self._badge(Config.FORCE_PREMIUM_MODE))
+            table.add_row("[5]", "Cache",                 self._badge(Config.USE_CACHE))
             table.add_row("",    "",                      "")
             table.add_row("[0]", Language.get("menu_0"),  "")
             console.print(table); console.print()
-            c = Prompt.ask(f"[bold green]👉 {Language.get('prompt_choice')}[/]", choices=["1", "2", "3", "4", "5", "6", "0"])
+            c = Prompt.ask(f"[bold green]👉 {Language.get('prompt_choice')}[/]", choices=["1", "2", "3", "4", "5", "0"])
             if c == "1":   self.proxy_setup()
             elif c == "2": self.threads_setup()
             elif c == "3": self.advanced_setup()
-            elif c == "4": self.change_language()
-            elif c == "5": self.premium_mode_setup()
-            elif c == "6": self._toggle_cache_quick()
+            elif c == "4": self.premium_mode_setup()
+            elif c == "5": self._toggle_cache_quick()
             elif c == "0": break
-
-    def change_language(self):
-        self.print_header()
-        console.print(f"\n  [bold cyan]{Language.get('lang_select')}[/]")
-        table = Table(show_header=False, box=None, padding=(0, 2))
-        table.add_row("[1]", "English"); table.add_row("[2]", "Tiếng Việt")
-        console.print(table)
-        c = Prompt.ask("\n  Option", choices=["1", "2"])
-        if c == "1":   Config.LANGUAGE = "en"; console.print("\n  [bold green]✓ Language set to English[/]")
-        elif c == "2": Config.LANGUAGE = "vi"; console.print("\n  [bold green]✓ Đã chuyển sang Tiếng Việt[/]")
-        Config.save_config(); time.sleep(1)
 
     def _toggle_cache_quick(self):
         Config.USE_CACHE = self._ask_toggle("Cache", Config.USE_CACHE)
         Config.save_config()
-        console.print(f"  [bold green]✓ Đã lưu![/]  Cache: {self._badge(Config.USE_CACHE)}")
+        console.print(f"  [bold green]✓ Saved![/]  Cache: {self._badge(Config.USE_CACHE)}")
         time.sleep(1)
 
     @staticmethod
@@ -168,49 +155,49 @@ class Menu:
         badge  = Menu._badge(current)
         console.print(f"\n  {feature_name}: {badge}")
         if current:
-            if Confirm.ask("  ➜ Tắt đi?", default=False): return False
+            if Confirm.ask("  ➜ Turn off?", default=False): return False
         else:
-            if Confirm.ask("  ➜ Bật lên?", default=False): return True
+            if Confirm.ask("  ➜ Turn on?", default=False): return True
         return current
 
     def proxy_setup(self):
         while True:
             Config.load_config()
             self.print_header()
-            console.print("\n  [bold cyan]━━  PROXY  ━━[/]")
+            console.print("\n\n\n  [bold cyan]━━  PROXY  ━━[/]")
             grid = Table.grid(padding=(0, 3))
             grid.add_column(style="dim", justify="right")
             grid.add_column()
-            grid.add_row("Trạng thái:", self._badge(Config.USE_PROXY))
+            grid.add_row("Status:", self._badge(Config.USE_PROXY))
             if Config.USE_PROXY and Config.PROXY_HOST:
                 auth_part = f"{Config.PROXY_USERNAME}@" if Config.PROXY_USERNAME else ""
-                grid.add_row("Địa chỉ:  ", f"[white]{Config.PROXY_TYPE}://{auth_part}{Config.PROXY_HOST}:{Config.PROXY_PORT}[/]")
+                grid.add_row("Address:  ", f"[white]{Config.PROXY_TYPE}://{auth_part}{Config.PROXY_HOST}:{Config.PROXY_PORT}[/]")
             console.print(grid); console.print()
             opts = Table(show_header=False, box=None, padding=(0,2))
             opts.add_column("Key", style="bold cyan", justify="right", width=6)
             opts.add_column()
-            opts.add_row("[1]", "Bật / Tắt Proxy")
-            opts.add_row("[2]", "Chỉnh host / port / auth")
-            opts.add_row("[3]", "Test proxy ngay")
+            opts.add_row("[1]", "Toggle Proxy")
+            opts.add_row("[2]", "Edit host / port / auth")
+            opts.add_row("[3]", "Test proxy now")
             opts.add_row("", "")
-            opts.add_row("[0]", "Quay lại")
+            opts.add_row("[0]", "Back")
             console.print(opts); console.print()
-            c = Prompt.ask("  Chọn", choices=["1","2","3","0"])
+            c = Prompt.ask("  Select", choices=["1","2","3","0"])
             if c == "0": break
             elif c == "1":
                 Config.USE_PROXY = self._ask_toggle("Proxy", Config.USE_PROXY)
                 Config.save_config()
-                console.print(f"  [bold green]✓ Đã lưu![/]  Proxy: {self._badge(Config.USE_PROXY)}")
+                console.print(f"  [bold green]✓ Saved![/]  Proxy: {self._badge(Config.USE_PROXY)}")
                 time.sleep(1)
             elif c == "2":
-                console.print("\n  [dim]── Để trống Username nếu proxy không cần auth ──[/]\n")
-                console.print("  [dim]Loại proxy:[/]")
-                console.print("  [dim]  http   — phổ biến nhất, nhưng nhiều proxy free KHÔNG hỗ trợ HTTPS[/]")
-                console.print("  [dim]  socks5 — hỗ trợ cả HTTP lẫn HTTPS, ổn định hơn[/]")
-                console.print("  [dim]  https  — proxy server dùng SSL[/]")
-                Config.PROXY_TYPE = Prompt.ask("  Loại", choices=["http","https","socks5"], default=Config.PROXY_TYPE or "http")
+                console.print("\n\n\n  [dim]── Leave Username blank if proxy does not require auth ──[/]\n")
+                console.print("\n\n  [dim]Proxy type:[/]")
+                console.print("\n\n  [dim]  http   — most common, but many free proxies DO NOT support HTTPS[/]")
+                console.print("\n\n  [dim]  socks5 — supports both HTTP and HTTPS, more stable[/]")
+                console.print("\n\n  [dim]  https  — proxy server using SSL[/]")
+                Config.PROXY_TYPE = Prompt.ask("  Type", choices=["http","https","socks5"], default=Config.PROXY_TYPE or "http")
                 if Config.PROXY_TYPE == "http":
-                    console.print("  [bold yellow]⚠ HTTP proxy có thể không tải được từ PikPak (HTTPS). Nếu lỗi hãy thử socks5.[/]")
+                    console.print("\n\n  [bold yellow]⚠ HTTP proxy might not be able to download from PikPak (HTTPS). If error occurs, try socks5.[/]")
                 Config.PROXY_HOST = Prompt.ask("  Host / IP",  default=Config.PROXY_HOST)
                 port_raw = Prompt.ask("  Port", default=Config.PROXY_PORT)
                 try:
@@ -218,86 +205,86 @@ class Menu:
                     if not (1 <= p <= 65535): raise ValueError
                     Config.PROXY_PORT = str(p)
                 except ValueError:
-                    console.print("  [bold red]✖ Port không hợp lệ (1-65535)[/]")
+                    console.print("\n\n  [bold red]✖ Invalid port (1-65535)[/]")
                     time.sleep(1.5); continue
-                Config.PROXY_USERNAME = Prompt.ask("  Username (Enter nếu không có)", default=Config.PROXY_USERNAME)
+                Config.PROXY_USERNAME = Prompt.ask("  Username (Enter if none)", default=Config.PROXY_USERNAME)
                 if Config.PROXY_USERNAME.strip(): Config.PROXY_PASSWORD = Prompt.ask("  Password", default=Config.PROXY_PASSWORD, password=True)
                 else: Config.PROXY_USERNAME = ""; Config.PROXY_PASSWORD = ""
                 Config.save_config()
-                console.print("  [bold green]✓ Đã lưu![/]")
+                console.print("\n\n  [bold green]✓ Saved![/]")
                 time.sleep(1)
             elif c == "3":
-                with console.status("  Đang test HTTP → HTTPS...", spinner="dots"):
+                with console.status("  Testing HTTP → HTTPS...", spinner="dots"):
                     ok, msg = Config.test_proxy()
                 console.print()
                 if ok: console.print(f"  [bold green]{msg}[/]")
                 else:
                     console.print(f"  [bold red]✖ {msg}[/]\n")
-                    console.print("  [bold yellow]Hướng xử lý:[/]")
-                    console.print("  [dim]1. Đổi loại proxy sang [bold]socks5[/bold] (hỗ trợ HTTPS tốt nhất)[/]")
-                    console.print("  [dim]2. Kiểm tra proxy còn sống: proxynova.com/proxy-checker[/]")
-                    console.print("  [dim]3. Proxy HTTP free thường không tunnel được HTTPS[/]")
-                Prompt.ask("\n  Enter để tiếp tục...")
+                    console.print("\n\n  [bold yellow]Troubleshooting:[/]")
+                    console.print("\n\n  [dim]1. Change proxy type to [bold]socks5[/bold] (best HTTPS support)[/]")
+                    console.print("\n\n  [dim]2. Check if proxy is alive: proxynova.com/proxy-checker[/]")
+                    console.print("\n\n  [dim]3. Free HTTP proxy usually cannot tunnel HTTPS[/]")
+                Prompt.ask("\n  Enter to continue...")
 
     def threads_setup(self):
         self.print_header()
-        console.print("\n  [bold cyan]━━  SỐ LUỒNG TẢI  ━━[/]\n")
+        console.print("\n\n\n  [bold cyan]━━  DOWNLOAD THREADS  ━━[/]\n")
         grid = Table.grid(padding=(0, 3))
         grid.add_column(style="dim", justify="right")
         grid.add_column()
-        grid.add_row("Luồng/file hiện tại:", f"[cyan]{Config.CONCURRENT_THREADS}[/] connections")
-        grid.add_row("Tốc độ ước tính:    ", f"[cyan]~{Config.CONCURRENT_THREADS * 11} MB/s[/] tối đa")
-        grid.add_row("Khuyến nghị:        ", "[dim]8–16 cho tốc độ tốt nhất[/]")
+        grid.add_row("Current threads/file:", f"[cyan]{Config.CONCURRENT_THREADS}[/] connections")
+        grid.add_row("Estimated speed:    ", f"[cyan]~{Config.CONCURRENT_THREADS * 11} MB/s[/] max")
+        grid.add_row("Recommended:        ", "[dim]8–16 for best speed[/]")
         console.print(grid); console.print()
         try:
-            v = Prompt.ask("  Số luồng/file", default=str(Config.CONCURRENT_THREADS))
+            v = Prompt.ask("  Threads/file", default=str(Config.CONCURRENT_THREADS))
             Config.CONCURRENT_THREADS = max(1, int(v))
         except ValueError: pass
         Config.save_config()
-        console.print(f"\n  [bold green]✓ Đã lưu![/]  Luồng: [cyan]{Config.CONCURRENT_THREADS}[/] conn  (~{Config.CONCURRENT_THREADS * 11} MB/s max)")
+        console.print(f"\n  [bold green]✓ Saved![/]  Threads: [cyan]{Config.CONCURRENT_THREADS}[/] conn  (~{Config.CONCURRENT_THREADS * 11} MB/s max)")
         time.sleep(1.5)
 
     def premium_mode_setup(self):
         self.print_header()
-        console.print("\n  [bold cyan]━━  PREMIUM TRANSFER MODE  ━━[/]")
+        console.print("\n\n\n  [bold cyan]━━  PREMIUM TRANSFER MODE  ━━[/]")
         grid = Table.grid(padding=(0, 3))
         grid.add_column(style="dim", justify="right")
         grid.add_column()
-        grid.add_row("Trạng thái:", self._badge(Config.FORCE_PREMIUM_MODE))
-        grid.add_row("Khi BẬT:  ", "[dim]Restore TẤT CẢ file lên cloud trước khi tải[/]")
-        grid.add_row("Khi TẮT:  ", "[dim]Chỉ restore video/zip/rar/iso (mặc định)[/]")
+        grid.add_row("Status:", self._badge(Config.FORCE_PREMIUM_MODE))
+        grid.add_row("When ON:  ", "[dim]Restore ALL files to cloud before downloading[/]")
+        grid.add_row("When OFF:  ", "[dim]Only restore video/zip/rar/iso (default)[/]")
         console.print(grid)
         Config.FORCE_PREMIUM_MODE = self._ask_toggle("Premium Mode", Config.FORCE_PREMIUM_MODE)
         Config.save_config()
-        console.print(f"\n  [bold green]✓ Đã lưu![/]  Premium Mode: {self._badge(Config.FORCE_PREMIUM_MODE)}")
+        console.print(f"\n  [bold green]✓ Saved![/]  Premium Mode: {self._badge(Config.FORCE_PREMIUM_MODE)}")
         time.sleep(1.5)
 
     def advanced_setup(self):
         self.print_header()
-        console.print("\n  [bold cyan]━━  CÀI ĐẶT NÂNG CAO  ━━[/]")
+        console.print("\n  [bold cyan]━━  ADVANCED SETTINGS  ━━[/]")
         grid = Table.grid(padding=(0, 3))
         grid.add_column(style="dim", justify="right")
         grid.add_column()
-        grid.add_row("File đồng thời:", f"[cyan]{Config.MAX_WORKERS}[/]")
-        grid.add_row("Thư mục tải:  ", f"[dim]{Config.get_download_dir()}[/]")
+        grid.add_row("Max concurrent workers: ", f"[cyan]{Config.MAX_WORKERS}[/]")
+        grid.add_row("Download dir: ", f"[dim]{Config.get_download_dir()}[/]")
         grid.add_row("Timeout:      ", f"[cyan]{Config.TIMEOUT}[/]s")
         grid.add_row("Cache:        ", self._badge(Config.USE_CACHE))
         console.print(grid); console.print()
+
         try:
-            v = Prompt.ask("  Số file tải đồng thời", default=str(Config.MAX_WORKERS))
+            v = Prompt.ask("  Max concurrent workers (files)", default=str(Config.MAX_WORKERS))
             Config.MAX_WORKERS = max(1, int(v))
         except ValueError: pass
-        Config.DOWNLOAD_PATH_STR = Prompt.ask("  Thư mục lưu", default=Config.DOWNLOAD_PATH_STR)
+        Config.DOWNLOAD_PATH_STR = Prompt.ask("  Download directory", default=Config.DOWNLOAD_PATH_STR)
         try:
-            v = Prompt.ask("  Timeout (giây)", default=str(Config.TIMEOUT))
+            v = Prompt.ask("  Timeout (seconds)", default=str(Config.TIMEOUT))
             Config.TIMEOUT = max(5, int(v))
         except ValueError: pass
         Config.USE_CACHE = self._ask_toggle("Cache", Config.USE_CACHE)
         Config.save_config()
         Config.setup_dirs()
-        console.print("\n  [bold green]✓ Đã lưu toàn bộ![/]")
+        console.print("\n  [bold green]✓ All settings saved![/]")
         time.sleep(1.5)
-
     def cache_menu(self):
         self.print_header()
         size, count = CacheManager.get_cache_size()
@@ -388,7 +375,7 @@ class Menu:
         if not accounts:
             console.print(f"  [dim]{Language.get('acc_none')}[/]")
             time.sleep(2); return
-        idx_str = Prompt.ask(f"  Số thứ tự cần xóa (1-{len(accounts)})")
+        idx_str = Prompt.ask(f"  Index to remove (1-{len(accounts)})")
         try:
             idx = int(idx_str) - 1
             if not (0 <= idx < len(accounts)): raise ValueError
@@ -419,7 +406,7 @@ class Menu:
     def download_menu(self):
         Config.load_config()
         self.print_header()
-        raw_url = Prompt.ask(f"\n  [bold green]🔗 {Language.get('input_link')} (Mỗi link cách nhau dấu phẩy)[/]")
+        raw_url = Prompt.ask(f"\n  [bold green]🔗 {Language.get('input_link')} (Separate links with comma)[/]")
         if not raw_url: return
         pwd = Prompt.ask(f"  [bold white]🔑 {Language.get('input_pwd')}[/]", password=True)
         url_list = [u.strip() for u in raw_url.split(',') if u.strip()]
@@ -485,7 +472,7 @@ class Menu:
         console.print(f"\n[bold yellow]⬇ Downloading {len(download_items)} file(s) from {link_count} link(s) concurrently[/]")
         cancelled = self.run_download_with_retry(download_items)
         if cancelled:
-            console.print("\n[bold red]⛔ Cancelled – remaining files skipped.[/]")
+            console.print("\n\n\n[bold red]⛔ Cancelled – remaining files skipped.[/]")
             time.sleep(2)
 
     def run_download_with_retry(self, files) -> bool:
@@ -549,7 +536,7 @@ class Menu:
             failed_count = len(failed_files)
             console.print(Panel(f"[bold green]COMPLETED![/]\n\n[green]Success: {done_count}[/]\n[red]Failed:  {failed_count}[/]", title="RESULT", border_style="green", box=box.ROUNDED))
             if failed_count > 0:
-                if Confirm.ask(f"[bold yellow]⚠ Có {failed_count} file bị lỗi. Retry?[/]"):
+                if Confirm.ask(f"[bold yellow]⚠ There are {failed_count} failed files. Retry?[/]"):
                     files = failed_files
                     continue
                 else: break

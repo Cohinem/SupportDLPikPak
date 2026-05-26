@@ -42,7 +42,6 @@ class Language:
             "set_header":     "SYSTEM SETTINGS",
             "set_proxy":      "Configure Proxy",
             "set_adv":        "Advanced (Workers, Path, Timeout)",
-            "set_lang":       "Change Language / Đổi Ngôn Ngữ",
             "proxy_status":   "Proxy Status",
             "proxy_toggle":   "Enable/Disable Proxy?",
             "thread_prompt":  "Threads per file (Default 8)",
@@ -79,10 +78,6 @@ class Language:
             "update_ask_src": "Auto-update source code now?",
             "update_done":    "✓ Update successful! Restarting...",
             "update_fail":    "✖ Update failed",
-            "lang_select":    "Select Language / Chọn ngôn ngữ",
-            "lang_en":        "English",
-            "lang_vi":        "Tiếng Việt",
-            "lang_set":       "✓ Language set to English",
             "global_stats":   "GLOBAL STATISTICS",
             "status_restore": "Restoring...",
             "status_check":   "Checking...",
@@ -100,94 +95,13 @@ class Language:
             "acc_removed":    "✓ Account removed!",
             "acc_invalid":    "✖ Invalid index.",
             "acc_pool_size":  "Active accounts in pool",
-        },
-        "vi": {
-            "menu_title":     "PikPak Downloader",
-            "menu_dev":       "Phát triển bởi SakerLy",
-            "menu_1":         "Đăng nhập tài khoản PikPak",
-            "menu_2":         "Tải file từ link PikPak",
-            "menu_3":         "Cài đặt (Proxy, Luồng, Đường dẫn)",
-            "menu_4":         "Quản lý Cache",
-            "menu_5":         "Xem cấu hình",
-            "menu_6":         "Quản lý tài khoản phụ",
-            "menu_0":         "Thoát",
-            "prompt_choice":  "Chọn chức năng",
-            "login_header":   "ĐĂNG NHẬP PIKPAK",
-            "login_user":     "Email / SĐT / Username",
-            "login_pass":     "Mật khẩu",
-            "login_wait":     "Đang đăng nhập...",
-            "login_fail":     "✖ Đăng nhập thất bại! Kiểm tra lại thông tin.",
-            "login_success":  "✓ Đăng nhập thành công!",
-            "token_missing":  "✖ Chưa có Refresh Token. Hãy đăng nhập trước.",
-            "set_header":     "CÀI ĐẶT HỆ THỐNG",
-            "set_proxy":      "Cấu hình Proxy",
-            "set_adv":        "Nâng cao (File đồng thời, Đường dẫn)",
-            "set_lang":       "Đổi Ngôn Ngữ / Change Language",
-            "proxy_status":   "Trạng thái Proxy",
-            "proxy_toggle":   "Bật/Tắt Proxy?",
-            "thread_prompt":  "Số luồng tải mỗi file (Mặc định 8)",
-            "prem_status":    "Chế độ Premium",
-            "prem_toggle":    "Dùng tài khoản Premium để tải TẤT CẢ file?",
-            "save_success":   "✓ Đã lưu cài đặt!",
-            "worker_prompt":  "Số file tải cùng lúc",
-            "path_prompt":    "Thư mục lưu file",
-            "timeout_prompt": "Timeout (giây)",
-            "cache_prompt":   "Sử dụng Cache?",
-            "cache_info":     "THÔNG TIN CACHE",
-            "cache_files":    "Số lượng file",
-            "cache_size":     "Dung lượng",
-            "cache_clear":    "Xóa toàn bộ cache?",
-            "cache_cleared":  "✓ Đã dọn dẹp cache!",
-            "input_link":     "Nhập Link PikPak",
-            "input_pwd":      "Mật khẩu (nếu có)",
-            "analyzing":      "➜ Đang phân tích cấu trúc thư mục...",
-            "link_invalid":   "✖ URL không hợp lệ!",
-            "no_files":       "✖ Không tìm thấy file trong liên kết này.",
-            "link_info":      "THÔNG TIN LINK",
-            "total_files":    "Tổng số file",
-            "total_size":     "Tổng dung lượng",
-            "dl_opt_1":       "Tải tất cả",
-            "dl_opt_2":       "Chọn file để tải",
-            "dl_opt_0":       "Hủy",
-            "dl_complete":    "HOÀN TẤT!",
-            "dl_success":     "Thành công",
-            "dl_skip":        "Đã có (Skip)",
-            "dl_error":       "Lỗi",
-            "update_check":   "Đang kiểm tra bản cập nhật...",
-            "update_found":   "🚀 CÓ BẢN CẬP NHẬT MỚI",
-            "update_ask_web": "Mở trình duyệt để tải ngay?",
-            "update_ask_src": "Tự động cập nhật Source Code ngay?",
-            "update_done":    "✓ Cập nhật thành công! Đang khởi động lại...",
-            "update_fail":    "✖ Lỗi cập nhật",
-            "lang_select":    "Chọn ngôn ngữ / Select Language",
-            "lang_en":        "Tiếng Anh (English)",
-            "lang_vi":        "Tiếng Việt",
-            "lang_set":       "✓ Đã chuyển sang Tiếng Việt",
-            "global_stats":   "THỐNG KÊ TIẾN TRÌNH",
-            "status_restore": "Đang lưu vào Cloud...",
-            "status_check":   "Tìm file...",
-            "status_getlink": "Lấy Link...",
-            "status_dl":      "Đa Luồng...",
-            "status_clean":   "Xóa Vĩnh Viễn...",
-            "acc_header":     "TÀI KHOẢN PHỤ",
-            "acc_info":       "Mỗi tài khoản phụ thêm ~11 MB/s vào tổng tốc độ.",
-            "acc_list":       "Danh sách tài khoản",
-            "acc_add":        "Thêm tài khoản phụ",
-            "acc_remove":     "Xóa tài khoản phụ",
-            "acc_test":       "Kiểm tra tất cả tài khoản",
-            "acc_none":       "Chưa có tài khoản phụ nào.",
-            "acc_added":      "✓ Đã thêm tài khoản!",
-            "acc_removed":    "✓ Đã xóa tài khoản!",
-            "acc_invalid":    "✖ Số thứ tự không hợp lệ.",
-            "acc_pool_size":  "Tài khoản đang hoạt động",
-        },
+        }
     }
 
     @classmethod
     def get(cls, key):
-        lang = Config.LANGUAGE
-        return (cls.STRINGS.get(lang, cls.STRINGS["en"])
-                .get(key, cls.STRINGS["en"].get(key, key)))
+        return cls.STRINGS["en"].get(key, key)
+
 
 class Config:
     BASE_DIR    = BASE_DIR
@@ -195,7 +109,7 @@ class Config:
     LOG_DIR     = BASE_DIR / "logs"
     LOG_FILE    = LOG_DIR / "pikpak_tool.log"
 
-    REFRESH_TOKEN = ""; DEVICE_ID = ""; CAPTCHA_TOKEN = ""; LANGUAGE = "en"
+    REFRESH_TOKEN = ""; DEVICE_ID = ""; CAPTCHA_TOKEN = ""
     USE_PROXY = False; PROXY_TYPE = "http"; PROXY_HOST = ""
     PROXY_PORT = ""; PROXY_USERNAME = ""; PROXY_PASSWORD = ""
     FORCE_PREMIUM_MODE = False
@@ -233,7 +147,7 @@ class Config:
     @classmethod
     def test_proxy(cls) -> tuple:
         proxy = cls.get_proxy_dict()
-        if not proxy: return False, "Proxy chưa cấu hình"
+        if not proxy: return False, "Proxy not configured"
 
         import requests as _req, urllib3 as _ul3
         _ul3.disable_warnings()
@@ -248,23 +162,23 @@ class Config:
         except Exception as e:
             session.close()
             err = str(e)
-            if "407" in err or "Proxy Authentication" in err: return False, "Proxy yêu cầu xác thực"
-            if "No module" in err and "socks" in err.lower(): return False, "Thiếu thư viện requests[socks]"
-            if "SOCKS" in err or "socks" in err.lower(): return False, f"SOCKS lỗi loại proxy ({cls.PROXY_TYPE})"
-            return False, f"Kết nối thất bại: {e}"
+            if "407" in err or "Proxy Authentication" in err: return False, "Proxy requires authentication"
+            if "No module" in err and "socks" in err.lower(): return False, "Missing requests[socks] library"
+            if "SOCKS" in err or "socks" in err.lower(): return False, f"SOCKS proxy type error ({cls.PROXY_TYPE})"
+            return False, f"Connection failed: {e}"
 
         try:
             r  = session.get("https://api.ipify.org?format=json", timeout=10)
             ip = r.json().get("ip", "?")
             session.close()
-            return True, f"OK — IP qua proxy: {ip}"
+            return True, f"OK — IP via proxy: {ip}"
         except Exception as e:
             session.close()
             err = str(e)
-            if "SSLError" in err or "CONNECT" in err or "tunnel" in err.lower(): return False, "Không hỗ trợ HTTPS tunnel"
-            if "407" in err or "Proxy Authentication" in err: return False, "Yêu cầu xác thực"
+            if "SSLError" in err or "CONNECT" in err or "tunnel" in err.lower(): return False, "HTTPS tunnel not supported"
+            if "407" in err or "Proxy Authentication" in err: return False, "Authentication required"
             if "timed out" in err.lower() or "Timeout" in err: return False, "Proxy timeout"
-            return False, f"HTTPS thất bại: {e}"
+            return False, f"HTTPS failed: {e}"
 
     @classmethod
     def load_config(cls):
@@ -279,7 +193,7 @@ class Config:
                 cls.DOWNLOAD_PATH_STR  = d.get("download_path",   "downloads")
                 cls.TIMEOUT            = int(d.get("timeout",      30))
                 cls.USE_CACHE          = d.get("use_cache",        True)
-                cls.LANGUAGE           = d.get("language",         "en")
+
                 cls.USE_PROXY          = d.get("use_proxy",        False)
                 cls.PROXY_TYPE         = d.get("proxy_type",       "http")
                 cls.PROXY_HOST         = d.get("proxy_host",       "")
@@ -304,7 +218,7 @@ class Config:
                 "download_path":      cls.DOWNLOAD_PATH_STR,
                 "timeout":            cls.TIMEOUT,
                 "use_cache":          cls.USE_CACHE,
-                "language":           cls.LANGUAGE,
+
                 "use_proxy":          cls.USE_PROXY,
                 "proxy_type":         cls.PROXY_TYPE,
                 "proxy_host":         cls.PROXY_HOST,
